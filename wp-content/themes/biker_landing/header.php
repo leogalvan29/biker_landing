@@ -51,8 +51,8 @@
         </header><!-- #masthead -->
         <style>
         .site-logo img {
-            max-width: <?php echo esc_attr(get_theme_mod('logo_size_header', '100px'));
-            ?>;
+            width: <?php echo esc_attr(get_theme_mod('logo_size_header' , '50px'));
+            ?>px;
             height: auto;
         }
 

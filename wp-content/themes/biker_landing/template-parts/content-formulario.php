@@ -1,6 +1,7 @@
 <div class="contenedor-formulario">
+    <h1 class="titulo-solicitar">Solicitar Cotización</h1>
 <div class="row-formulario">
-     <form action="" method="POST">
+     <form action="" method="POST" class="formulario">
          <div class="campo">
             <label for="nombre">Nombre</label>
             <input type="text" name="nombre" id="nombre">

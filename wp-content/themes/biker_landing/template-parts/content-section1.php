@@ -24,14 +24,19 @@
      <div class="row-contenedor-1">
          <div class="img-1">
             <?php  $imagen_1 = get_field('imagen_1') ?>
-
-            <img src="<?php echo esc_url($imagen_1); ?>" alt="bike" >
+            <?php if(!$imagen_1):  ?> 
+                <h3>Inserta una imagen</h3>
+               <?php else : ?>
+               <img src="<?php echo esc_url($imagen_1); ?>" alt="bike" >
+             <?php endif;  ?>   
+            
             
             
          </div>
          <div class="txt-1">
           <?php  $txt_titulo_1 = get_field('txt_titulo_1') ?> 
           <h3><?php  echo $txt_titulo_1  ?></h3> 
+          
           <?php $size_txt_titulo_1 = get_field('size_txt_titulo_1') ?>
           <?php  $color_txt_titulo_1 = get_field('color_txt_titulo_1') ?>
           <?php  $altura_txt_titulo = get_field('altura_txt_titulo') ?>

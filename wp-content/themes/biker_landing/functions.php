@@ -281,26 +281,39 @@ function biker_landing_customizer($wp_customize) {
 		'sanitize_callback' => 'absint'
     ));
 
-    $wp_customize->add_control('button_width_header', array(
-        'label'    => __('Ancho del Botón', 'biker-landing'),
-        'section'  => 'button_section',
-        'settings' => 'button_width_header',
-        'type'     => 'text',
+	//seccion footer opciones
+
+    $wp_customize->add_section('opciones_footer', array(
+        'title' => __('Opciones de Footer', 'biker-landing'), // Nombre de la sección (reemplaza 'tu-text-domain' con tu text-domain)
+        'priority' => 30, // Prioridad de visualización en el Personalizador
     ));
 
-    // Nuevo control para la altura del botón
-    $wp_customize->add_setting('button_height_header', array(
-        'default'   => '50px',
+    // Control de Color
+    $wp_customize->add_setting('color_footer', array(
+        'default' => '#ff0000', // Valor por defecto del color
+        'sanitize_callback' => 'sanitize_hex_color', // Función para sanitizar el valor del color
+    ));
+
+    $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'color_primario_control', array(
+        'label' => __('Color background footer', 'biker-landing'), // Etiqueta del control (reemplaza 'tu-text-domain' con tu text-domain)
+        'section' => 'opciones_footer', // Sección a la que pertenece el control
+        'settings' => 'color_footer', // Configuración asociada al control
+    )));
+
+	$wp_customize->add_setting('texto_footer', array(
+        'default'   => 'Titulo del footer',
         'transport' => 'refresh',
-		'sanitize_callback' => 'absint'
+		'sanitize_callback' => 'sanitize_text_field'
     ));
 
-    $wp_customize->add_control('button_height_header', array(
-        'label'    => __('Altura del Botón', 'biker-landing'),
-        'section'  => 'button_section',
-        'settings' => 'button_height_header',
+    $wp_customize->add_control('texto_footer', array(
+        'label'    => __('Texto del titulo footer', 'biker-landing'),
+        'section'  => 'opciones_footer',
+        'settings' => 'texto_footer',
         'type'     => 'text',
-    ));
+    )); 
+
+	 
 }
 
 add_action('customize_register', 'biker_landing_customizer');

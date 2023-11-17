@@ -50,7 +50,18 @@ jQuery(document).ready(function($){
              console.log('enviando datos') 
              setTimeout(() => {
                 $('.error-form').remove()
-             },1000)
+             },1000) 
+
+             const mensajeExitoso = document.createElement('p')
+             mensajeExitoso.textContent = "Tu mensaje ha sido enviado"
+             mensajeExitoso.classList.add('.mensaje-exitoso')
+             setTimeout(() => {
+                  $('.formulario').append(mensajeExitoso)
+             },1000) 
+
+             setTimeout(() => {
+                $('.mensaje-exitoso').remove()
+             },2000)
           }
         
     }) 
