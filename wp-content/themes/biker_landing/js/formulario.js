@@ -30,9 +30,11 @@ jQuery(document).ready(function($){
           } else {
             $.ajax({
               type:'POST',
-              url:my_ajax_object.ajax_url,
+              url:my_ajax_object.ajax_url, //esta se registra en el funcions php con otra funcion de validar  
+              /*  wp_enqueue_script('my-ajax-script', get_stylesheet_directory_uri() . '/js/formulario.js', array('jquery'));
+    wp_localize_script('my-ajax-script', 'my_ajax_object', array('ajax_url' => admin_url('admin-ajax.php')));  */
               data:{
-                action:'procesar_formulario_ajax',
+                action:'procesar_formulario_ajax', 
                 nombre:nombre,
                 email:email,
                 telefono:telefono,
@@ -42,7 +44,7 @@ jQuery(document).ready(function($){
                 console.log(response)
               }
            })
-           
+             //reseteamos el formulario
              $('#nombre').val('')
              $('#email').val('')
              $('#telefono').val('')
@@ -54,7 +56,7 @@ jQuery(document).ready(function($){
 
              const mensajeExitoso = document.createElement('p')
              mensajeExitoso.textContent = "Tu mensaje ha sido enviado"
-             mensajeExitoso.classList.add('.mensaje-exitoso')
+             mensajeExitoso.classList.add('mensaje-exitoso')
              setTimeout(() => {
                   $('.formulario').append(mensajeExitoso)
              },1000) 

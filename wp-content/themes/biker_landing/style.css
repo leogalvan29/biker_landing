@@ -1133,6 +1133,37 @@ padding: 30px 10px;
 
 .contenedor-seccion2{
 	padding: 50px 0px;
+	width: 100%;
+	height: auto;
+
+}
+
+.row-section-2 {
+	max-width: 1140px;
+	width: 90%;
+	margin: 0px auto;
+}
+
+.contenedor-seccion2 .row-section-2 ul{
+	
+	height: inherit;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+}
+
+@media(min-width:768px){
+	.contenedor-seccion2 .row-section-2 ul{
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+	}
+
+	.contenedor-seccion2 .row-section-2 ul li {
+		width: 30%;
+	}
 }
 
 .row-section-2 li{

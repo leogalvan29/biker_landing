@@ -313,6 +313,119 @@ function biker_landing_customizer($wp_customize) {
         'type'     => 'text',
     )); 
 
+	// Control para el tamaño del texto con sanitización (range)
+    $wp_customize->add_setting('tamano_titulo_footer', array(
+        'default' => '16', // Valor predeterminado
+        'transport' => 'refresh',
+        'sanitize_callback' => 'absint', // Sanitiza el campo como un número entero
+    ));
+
+    $wp_customize->add_control('tamano_titulo_footer', array(
+        'label' => __('Tamaño del Titulo footer', 'biker-landing'),
+        'section' => 'opciones_footer',
+        'settings' => 'tamano_titulo_footer',
+        'type' => 'range', // Tipo de control deslizante
+        'input_attrs' => array(
+            'min' => 10, // Valor mínimo
+            'max' => 150, // Valor máximo
+            'step' => 1, // Paso (incremento)
+        ),
+    ));
+
+
+	$wp_customize->add_setting('color_titulo_footer', array(
+        'default' => '#000000',
+        'transport' => 'refresh',
+        'sanitize_callback' => 'sanitize_hex_color', // Sanitiza el campo como color hexadecimal
+    ));
+
+    $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'text_color_control', array(
+        'label' => __('Color del Texto', 'biker-landing'),
+        'section' => 'opciones_footer',
+        'settings' => 'color_titulo_footer',
+    )));  
+
+	// Control para el texto del botón
+    $wp_customize->add_setting('texto_boton_footer', array(
+        'default' => 'Texto del boton footer',
+        'transport' => 'refresh',
+        'sanitize_callback' => 'sanitize_text_field', // Sanitiza el campo como texto
+    ));
+
+    $wp_customize->add_control('boton_footer', array(
+        'label' => __('Texto del Botón del footer', 'text-domain'),
+        'section' => 'opciones_footer',
+        'settings' => 'texto_boton_footer',
+        'type' => 'text',
+    )); 
+
+	 // Control para el color del texto del botón
+	 $wp_customize->add_setting('color_boton_footer', array(
+        'default' => '#ffffff',
+        'transport' => 'refresh',
+        'sanitize_callback' => 'sanitize_hex_color', // Sanitiza el campo como color hexadecimal
+    ));
+
+    $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'color_boton_footer', array(
+        'label' => __('Color del Texto del Botón', 'biker-landing'),
+        'section' => 'opciones_footer',
+        'settings' => 'color_boton_footer',
+    )));
+
+    // Control para el color de fondo del botón
+    $wp_customize->add_setting('fondo_boton_footer', array(
+        'default' => '#0073e6',
+        'transport' => 'refresh',
+        'sanitize_callback' => 'sanitize_hex_color', // Sanitiza el campo como color hexadecimal
+    ));
+
+    $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'fondo_boton_footer', array(
+        'label' => __('Color de Fondo del Botón', 'text-domain'),
+        'section' => 'opciones_footer',
+        'settings' => 'fondo_boton_footer',
+    )));
+
+	// Control para el ancho (width) del botón con rango
+    $wp_customize->add_setting('ancho_boton_footer', array(
+        'default' => '120',
+        'transport' => 'refresh',
+        'sanitize_callback' => 'absint', // Sanitiza el campo como un número entero
+    ));
+
+    $wp_customize->add_control('ancho_boton_footer', array(
+        'label' => __('Ancho del Botón', 'text-domain'),
+        'section' => 'opciones_footer',
+        'settings' => 'ancho_boton_footer',
+        'type' => 'range', // Tipo de control deslizante
+        'input_attrs' => array(
+            'min' => 100, // Valor mínimo
+            'max' => 300, // Valor máximo
+            'step' => 5, // Paso (incremento)
+        ),
+    ));
+
+	// Control para el alto (height) del botón con rango
+    $wp_customize->add_setting('alto_boton_footer', array(
+        'default' => '40',
+        'transport' => 'refresh',
+        'sanitize_callback' => 'absint', // Sanitiza el campo como un número entero
+    ));
+
+    $wp_customize->add_control('alto_boton_footer', array(
+        'label' => __('Altura del Botón', 'text-domain'),
+        'section' => 'opciones_footer',
+        'settings' => 'alto_boton_footer',
+        'type' => 'range', // Tipo de control deslizante
+        'input_attrs' => array(
+            'min' => 30, // Valor mínimo
+            'max' => 100, // Valor máximo
+            'step' => 2, // Paso (incremento)
+        ),
+    ));
+
+
+
+
 	 
 }
 
@@ -396,6 +509,8 @@ add_action('admin_menu','agregarClientesPagina');
 
 
 
+
+
 function mostrarTablaLeads(){
         global $wpdb;
 		$tabla_registros = $wpdb->prefix . 'leads';
@@ -409,9 +524,54 @@ function mostrarTablaLeads(){
 		echo '<tbody>';
 		foreach ($resultados as $registro) {
 			echo "<tr><td>{$registro->id}</td><td>{$registro->nombre}</td><td>{$registro->email}</td><td>{$registro->telefono}</td></tr>";
+			
 		}
-		echo '</tbody></table></div>';
+		echo '</tbody></table></div>'; 
+		
 
 }
+
+function biker_whatsapp(){
+	add_menu_page(
+        'Página de Administración', // Título 
+        'Opciones whatsapp', // Título de la página
+        'manage_options', // Capacidad requerida para ver esta página
+        'pagina-opciones-whatsapp', // Slug de la página
+        'biker_mostrarOpciones_whatsapp' // Función que muestra el contenido
+    );
+}
+
+add_action('admin_menu', 'biker_whatsapp'); 
+
+
+function mi_registrar_opciones() {
+    register_setting('mi_opcion_group', 'mi_opcion_name');
+}
+add_action('admin_init', 'mi_registrar_opciones');
+
+
+function biker_mostrarOpciones_whatsapp() {
+    ?>
+    <div class="wrap">
+        <h1>Mi Página de Configuración</h1>
+        <form method="post" action="options.php">
+            <?php
+                // Esto agrega campos de seguridad de WordPress
+                settings_fields('mi_opcion_group');
+                do_settings_sections('mi_opcion_page');
+                // Agregar tus campos personalizados aquí
+                echo '<label for="telefono">Número de Teléfono:</label>';
+                echo '<input type="tel" id="telefono" name="telefono" value="' . esc_attr(get_option('telefono')) . '" required><br><br>';
+                // Otros campos personalizados
+
+                // Botón para guardar
+                submit_button('Guardar cambios');
+            ?>
+        </form>
+    </div>
+    <?php
+}
+
+
 
 

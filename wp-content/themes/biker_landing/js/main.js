@@ -87,6 +87,22 @@ window.addEventListener('DOMContentLoaded' , function(){
     const botonEnviar = document.querySelector('#enviarFormulario') 
     botonEnviar.style.backgroundColor = colorFondo
     botonEnviar.style.color = colorTexto
+
+    window.addEventListener('scroll' , () => {
+      const scrollPX = window.scrollY 
+      console.log(scrollY)
+      const contenedor2 = document.querySelector('.contenedor-seccion2')
+       const ubicacion = contenedor2.getBoundingClientRect()
+       console.log(ubicacion)
+       if(ubicacion.top < 100) {
+        console.log('ya llegaste')
+       } 
+     
+    })
+
+    for(i = 0; i <= 100; i++){
+       //console.log(i = i % 2)
+    }
     
    
     
